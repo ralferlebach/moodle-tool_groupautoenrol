@@ -40,3 +40,11 @@ $string['auto_group_form_groupslist'] = 'Choose groups :';
 $string['auto_group_form_rolelist'] = 'Select role(s) concerned';
 $string['auto_group_enrol_form_no_group_found'] = 'Create groups first !';
 $string['privacy:null_reason'] = 'No userdata collected by this plugin.';
+
+$string['enrol_method'] = 'Enrol method';
+$string['enrol_method:alpha'] = 'Populate largest group first';
+$string['enrol_method:balanced'] = 'Balanced distribution';
+$string['enrol_method:random'] = 'Pure random allocation';
+$string['enrol_method:alpha_max_fillup'] = 'Fill group up to';
+$string['enrol_method:alpha_max_fillup_hint'] = 'Fill the group with the largest number of members until the specified number of members has been reached. Then, fill the next largest group(s). If the specified number of members has been reached or exceeded in all groups, continue filling in balanced distribution mode.';
+$string['enrol_method:alpha_max_fillup_not_zero'] = 'The number must be greater than zero.';
