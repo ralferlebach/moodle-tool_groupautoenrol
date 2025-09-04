@@ -65,7 +65,9 @@ if ($form->is_cancelled()) {
     $groupautoenrol->courseid = $course->id;
     $groupautoenrol->enable_enrol = $data->enable_enrol;
     $groupautoenrol->use_groupslist = $data->use_groupslist;
-
+    $groupautoenrol->enrol_method = $data->enrol_method;
+    $groupautoenrol->enrol_max_fillup = $data->enrol_max_fillup;
+    
     if (isset($data->groupslist)) { // Could be not set.
         $groupautoenrol->groupslist = implode(",", $data->groupslist);
     }

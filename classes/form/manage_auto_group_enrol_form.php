@@ -83,6 +83,7 @@ class manage_auto_group_enrol_form extends moodleform {
         }
 
         $instance = $DB->get_record('tool_groupautoenrol', ['courseid' => $course->id]);
+        
         $mform->addElement(
             'checkbox',
             'enable_enrol',
@@ -96,11 +97,26 @@ class manage_auto_group_enrol_form extends moodleform {
         );
         $mform->disabledIf('use_groupslist', 'enable_enrol');
 
+        // Adding enrolment method.
+        $fields = [
+            0 => get_string('enrol_method:random', 'tool_groupautoenrol'),
+            1 => get_string('enrol_method:alpha', 'tool_groupautoenrol'),
+            2 => get_string('enrol_method:balanced', 'tool_groupautoenrol'),
+        ];
+        $mform->addElement(
+            'select', 'enrol_method', get_string('enrol_method', 'tool_groupautoenrol'), $fields);
+        $mform->setType('enrol_method', PARAM_INT);
+       
+        // Adding max enrol member count.
+        $mform->addElement('text', 'enrol_max_fillup', get_string('enrol_method:alpha_max_fillup', 'tool_groupautoenrol'));
+        $mform->setType('enrol_max_fillup', PARAM_INT);
+        $mform->hideIf('enrol_max_fillup', 'enrol_method', 'neq', 1);
+
         $fields = [];
         foreach ($allgroupscourse as $group) {
             $fields[$group->id] = $group->name;
         }
-
+        
         $select = $mform->addElement(
             'select',
             'groupslist',
@@ -115,7 +131,17 @@ class manage_auto_group_enrol_form extends moodleform {
         $mform->setDefault('use_groupslist', $instance->use_groupslist ?? 0);
         $mform->setDefault('groupslist', explode(",", $instance->groupslist ?? ''));
         $mform->setDefault('enable_enrol', $instance->enable_enrol ?? 0);
-
+        $mform->setDefault('enrol_method', $instance->enrol_method ?? 0);
+        $mform->setDefault('enrol_max_fillup', $instance->enrol_max_fillup ?? 0);
     }
 
+    public function validation($data, $files) {
+        $errors = parent::validation($data, $files);
+
+        if ($data['enrol_method'] == 1 && isset($data['enrol_max_fillup']) && $data['enrol_max_fillup'] <= 0) {
+            $errors['enrol_max_fillup'] = get_string('enrol_method:alpha_max_fillup_not_zero', 'tool_groupautoenrol');
+        }
+
+    return $errors;
+    }
 }
