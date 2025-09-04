@@ -50,12 +50,14 @@ function xmldb_tool_groupautoenrol_upgrade(int $oldversion): bool {
     
     if ($oldversion < 2025090400) {
 
-        // Changing type of field enrol_max_fillup on table tool_groupautoenrol to int.
+        // Adding field enrol_max_fillup on table tool_groupautoenrol.
         $table = new xmldb_table('tool_groupautoenrol');
-        $field = new xmldb_field('enrol_max_fillup', XMLDB_TYPE_INT, null, null, null, null, null, 'enrol_method');
+        $field = new xmldb_field('enrol_max_fillup', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'enrol_method');
 
-        // Launch change of type for field groupslist.
-        $dbman->change_field_type($table, $field);
+        // Add field if not exist.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
 
         // Groupautoenrol savepoint reached.
         upgrade_plugin_savepoint(true, 2025090400, 'tool', 'groupautoenrol');
