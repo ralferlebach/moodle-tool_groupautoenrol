@@ -106,9 +106,11 @@ class manage_auto_group_enrol_form extends moodleform {
         $mform->addElement(
             'select', 'enrol_method', get_string('enrol_method', 'tool_groupautoenrol'), $fields);
         $mform->setType('enrol_method', PARAM_INT);
+        $mform->addHelpButton('enrol_method', 'enrol_method', 'tool_groupautoenrol');
        
         // Adding max enrol member count.
-        $mform->addElement('text', 'enrol_max_fillup', get_string('enrol_method:alpha_max_fillup', 'tool_groupautoenrol'));
+        $mform->addElement('text', 'enrol_max_fillup', get_string('enrol_max_fillup', 'tool_groupautoenrol'));
+        $mform->addHelpButton('enrol_max_fillup', 'enrol_max_fillup', 'tool_groupautoenrol');
         $mform->setType('enrol_max_fillup', PARAM_INT);
         $mform->hideIf('enrol_max_fillup', 'enrol_method', 'neq', 1);
 

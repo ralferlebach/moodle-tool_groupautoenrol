@@ -42,9 +42,10 @@ $string['auto_group_enrol_form_no_group_found'] = 'Create groups first !';
 $string['privacy:null_reason'] = 'No userdata collected by this plugin.';
 
 $string['enrol_method'] = 'Enrol method';
+$string['enrol_method_help'] = 'Determines the behavior of how the user will be enrolled into the specified groups:<br><br><b>Pure random allocation</b> will put a user in one of the courses by pure chance. Group member count might be unbalanced (especially with small group sizes).<br><br><b>Populate largest group</b> will place the user into the group with the most members unless the group size does not exceed a specified limit. This will result in continuously filling up each specified group, group by group.<br><br><b>Balanced distribution</b> will randomly place users more frequently into the less populated groups. As a result, you can expect quite evenly filled-up groups.';
 $string['enrol_method:alpha'] = 'Populate largest group first';
 $string['enrol_method:balanced'] = 'Balanced distribution';
 $string['enrol_method:random'] = 'Pure random allocation';
-$string['enrol_method:alpha_max_fillup'] = 'Fill group up to';
-$string['enrol_method:alpha_max_fillup_hint'] = 'Fill the group with the largest number of members until the specified number of members has been reached. Then, fill the next largest group(s). If the specified number of members has been reached or exceeded in all groups, continue filling in balanced distribution mode.';
+$string['enrol_max_fillup'] = 'Fill group up to';
+$string['enrol_max_fillup_help'] = 'Fill the group with the largest number of members until the specified number of members has been reached. Then, fill the next largest group(s). If the specified number of members has been reached or exceeded in all groups, continue filling in balanced distribution mode.';
 $string['enrol_method:alpha_max_fillup_not_zero'] = 'The number must be greater than zero.';

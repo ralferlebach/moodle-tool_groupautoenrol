@@ -47,5 +47,18 @@ function xmldb_tool_groupautoenrol_upgrade(int $oldversion): bool {
         // Groupautoenrol savepoint reached.
         upgrade_plugin_savepoint(true, 2024040400, 'tool', 'groupautoenrol');
     }
+    
+    if ($oldversion < 2025090400) {
+
+        // Changing type of field enrol_max_fillup on table tool_groupautoenrol to int.
+        $table = new xmldb_table('tool_groupautoenrol');
+        $field = new xmldb_field('enrol_max_fillup', XMLDB_TYPE_INT, null, null, null, null, null, 'enrol_method');
+
+        // Launch change of type for field groupslist.
+        $dbman->change_field_type($table, $field);
+
+        // Groupautoenrol savepoint reached.
+        upgrade_plugin_savepoint(true, 2025090400, 'tool', 'groupautoenrol');
+    }
     return true;
 }
